@@ -86,6 +86,7 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Spring Boot 依赖 -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
@@ -94,6 +95,7 @@
 				<scope>import</scope>
 			</dependency>
 
+			<!-- springaddons 模块 start -->
 			<dependency>
 				<groupId>com.c4-soft.springaddons</groupId>
 				<artifactId>spring-addons-oauth2</artifactId>
@@ -121,6 +123,7 @@
 				<artifactId>spring-addons-starter-rest</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<!-- springaddons 模块 end -->
 			
 			<dependency>
 				<groupId>org.springdoc</groupId>
