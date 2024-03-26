@@ -46,6 +46,8 @@
 	</distributionManagement>
 
 	<properties>
+
+		<!-- 使用JDK17 -->
 		<java.version>17</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
@@ -86,6 +88,7 @@
 
 	<dependencyManagement>
 		<dependencies>
+
 			<!-- Spring Boot 依赖 -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
@@ -95,7 +98,7 @@
 				<scope>import</scope>
 			</dependency>
 
-			<!-- springaddons 模块 start -->
+			<!-- springaddons项目定义的模块 start -->
 			<dependency>
 				<groupId>com.c4-soft.springaddons</groupId>
 				<artifactId>spring-addons-oauth2</artifactId>
@@ -123,8 +126,9 @@
 				<artifactId>spring-addons-starter-rest</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<!-- springaddons 模块 end -->
-			
+			<!-- springaddons项目定义的模块 end -->
+
+			<!-- OpenAPI START -->
 			<dependency>
 				<groupId>org.springdoc</groupId>
 				<artifactId>springdoc-openapi-starter-webflux-api</artifactId>
@@ -145,6 +149,7 @@
 				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 				<version>${springdoc-openapi.version}</version>
 			</dependency>
+			<!-- OpenAPI END -->
 		</dependencies>
 	</dependencyManagement>
 
@@ -328,13 +333,13 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+			<!--<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
-			</plugin>
+			</plugin>-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -350,7 +355,10 @@
 		</plugins>
 	</build>
 
+	<!-- 多环境配置 START -->
 	<profiles>
+
+		<!-- release环境 -->
 		<profile>
 			<id>release</id>
 			<modules>
@@ -389,6 +397,8 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<!-- default环境 -->
 		<profile>
 			<id>default</id>
 			<activation>
@@ -406,5 +416,5 @@
 			</modules>
 		</profile>
 	</profiles>
-
+	<!-- 多环境配置 END -->
 </project>

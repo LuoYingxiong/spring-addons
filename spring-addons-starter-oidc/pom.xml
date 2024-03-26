@@ -17,6 +17,8 @@
 	</scm>
 
 	<dependencies>
+
+		<!-- 依赖项目模块spring-addons-oauth2 -->
 		<dependency>
 			<groupId>com.c4-soft.springaddons</groupId>
 			<artifactId>spring-addons-oauth2</artifactId>
@@ -33,6 +35,8 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 		</dependency>
+
+		<!-- OAuth2.0 客户端依赖 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-oauth2-client</artifactId>
@@ -43,6 +47,8 @@
 			<artifactId>spring-webflux</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- OAuth2.0 资源服务器依赖 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-oauth2-resource-server</artifactId>

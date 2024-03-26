@@ -6,20 +6,25 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 
+/**
+ * 是否为响应式的OAuth2客户端条件
+ *
+ * @author luoyingxiong
+ */
 public class IsReactiveOauth2ClientCondition extends AllNestedConditions {
 
-	public IsReactiveOauth2ClientCondition() {
-		super(ConfigurationPhase.PARSE_CONFIGURATION);
-	}
+    public IsReactiveOauth2ClientCondition() {
+        super(ConfigurationPhase.PARSE_CONFIGURATION);
+    }
 
-	@ConditionalOnClass(OAuth2AuthorizedClientManager.class)
-	static class IsSynchornizedOauth2Client {
+    @ConditionalOnClass(OAuth2AuthorizedClientManager.class)
+    static class IsSynchornizedOauth2Client {
 
-	}
+    }
 
-	@ConditionalOnWebApplication(type = Type.REACTIVE)
-	static class IsServlet {
+    @ConditionalOnWebApplication(type = Type.REACTIVE)
+    static class IsServlet {
 
-	}
+    }
 
 }

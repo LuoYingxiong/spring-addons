@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class SpringAddonsMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressionHandler {
+
     private final Supplier<SpringAddonsMethodSecurityExpressionRoot> expressionRootSupplier;
 
     /**

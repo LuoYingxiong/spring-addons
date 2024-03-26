@@ -6,6 +6,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 
+/**
+ * 是否为 Servlet运行时的OAuth2 客户端条件
+ *
+ * @author luoyingxiong
+ */
 public class IsServletOauth2ClientCondition extends AllNestedConditions {
 
     public IsServletOauth2ClientCondition() {

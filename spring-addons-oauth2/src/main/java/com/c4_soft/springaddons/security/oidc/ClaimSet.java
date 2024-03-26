@@ -28,99 +28,99 @@ import org.springframework.util.StringUtils;
 import com.jayway.jsonpath.JsonPath;
 
 /**
- * Claim-sets are collections of key-value pairs, so lets extend {@code Map<String, Object>}
+ * Claim-sets 是键值对的集合，因此我们将其扩展为 {@code Map<String, Object>}
  *
  * @author Jérôme Wacongne &lt;ch4mp#64;c4-soft.com&gt;
  */
 public interface ClaimSet extends Map<String, Object>, Serializable {
 
-	default <T> T getByJsonPath(String jsonPath) {
-		return JsonPath.read(this, jsonPath);
-	}
+    default <T> T getByJsonPath(String jsonPath) {
+        return JsonPath.read(this, jsonPath);
+    }
 
-	default String getAsString(String name) {
-		final var claim = get(name);
-		return claim == null ? null : claim.toString();
-	}
+    default String getAsString(String name) {
+        final var claim = get(name);
+        return claim == null ? null : claim.toString();
+    }
 
-	default @Nullable Instant getAsInstant(String name) {
-		final var claim = get(name);
-		if (claim == null) {
-			return null;
-		}
-		if (claim instanceof final Long l) {
-			return Instant.ofEpochSecond(l);
-		}
-		if (claim instanceof final Instant instant) {
-			return instant;
-		}
-		if (claim instanceof final String str) {
-			return Instant.parse(str);
-		}
-		throw new UnparsableClaimException("claim " + name + " is of unsupported type " + claim.getClass().getName());
-	}
+    default @Nullable Instant getAsInstant(String name) {
+        final var claim = get(name);
+        if (claim == null) {
+            return null;
+        }
+        if (claim instanceof final Long l) {
+            return Instant.ofEpochSecond(l);
+        }
+        if (claim instanceof final Instant instant) {
+            return instant;
+        }
+        if (claim instanceof final String str) {
+            return Instant.parse(str);
+        }
+        throw new UnparsableClaimException("claim " + name + " is of unsupported type " + claim.getClass().getName());
+    }
 
-	default @Nullable Set<String> getAsStringSet(String name) {
-		final var claim = get(name);
-		if (claim == null) {
-			return null;
-		}
-		if (claim instanceof final Collection<?> collection) {
-			return collection.stream().flatMap(o -> Stream.of(o.toString().split(" "))).collect(Collectors.toSet());
-		}
-		return Stream.of(claim.toString().split(" ")).collect(Collectors.toSet());
-	}
+    default @Nullable Set<String> getAsStringSet(String name) {
+        final var claim = get(name);
+        if (claim == null) {
+            return null;
+        }
+        if (claim instanceof final Collection<?> collection) {
+            return collection.stream().flatMap(o -> Stream.of(o.toString().split(" "))).collect(Collectors.toSet());
+        }
+        return Stream.of(claim.toString().split(" ")).collect(Collectors.toSet());
+    }
 
-	default @Nullable URI getAsUri(String name) throws URISyntaxException {
-		final var claim = get(name);
-		if (claim == null) {
-			return null;
-		}
-		if (claim instanceof final URI uri) {
-			return uri;
-		}
-		return new URI(claim.toString());
-	}
+    default @Nullable URI getAsUri(String name) throws URISyntaxException {
+        final var claim = get(name);
+        if (claim == null) {
+            return null;
+        }
+        if (claim instanceof final URI uri) {
+            return uri;
+        }
+        return new URI(claim.toString());
+    }
 
-	default @Nullable Boolean getAsBoolean(String name) {
-		final var claim = get(name);
-		if (claim == null) {
-			return null;
-		}
-		if (claim instanceof final Boolean b) {
-			return b;
-		}
-		return Boolean.valueOf(claim.toString());
-	}
+    default @Nullable Boolean getAsBoolean(String name) {
+        final var claim = get(name);
+        if (claim == null) {
+            return null;
+        }
+        if (claim instanceof final Boolean b) {
+            return b;
+        }
+        return Boolean.valueOf(claim.toString());
+    }
 
-	default ClaimSet claim(String claimName, String claimValue) {
-		Assert.hasLength(claimName, "claimName can't be empty");
-		if (StringUtils.hasLength(claimValue)) {
-			put(claimName, claimValue);
-		} else {
-			remove(claimName);
-		}
-		return this;
-	}
+    default ClaimSet claim(String claimName, String claimValue) {
+        Assert.hasLength(claimName, "claimName can't be empty");
+        if (StringUtils.hasLength(claimValue)) {
+            put(claimName, claimValue);
+        } else {
+            remove(claimName);
+        }
+        return this;
+    }
 
-	default ClaimSet claim(String claimName, Collection<?> claimValue) {
-		Assert.hasLength(claimName, "claimName can't be empty");
-		if (claimValue == null || claimValue.isEmpty()) {
-			remove(claimName);
-		} else {
-			put(claimName, claimValue);
-		}
-		return this;
-	}
+    default ClaimSet claim(String claimName, Collection<?> claimValue) {
+        Assert.hasLength(claimName, "claimName can't be empty");
+        if (claimValue == null || claimValue.isEmpty()) {
+            remove(claimName);
+        } else {
+            put(claimName, claimValue);
+        }
+        return this;
+    }
 
-	default ClaimSet claim(String claimName, Object claimValue) {
-		Assert.hasLength(claimName, "claimName can't be empty");
-		if (claimValue == null) {
-			remove(claimName);
-		} else {
-			put(claimName, claimValue);
-		}
-		return this;
-	}
+    default ClaimSet claim(String claimName, Object claimValue) {
+        Assert.hasLength(claimName, "claimName can't be empty");
+        if (claimValue == null) {
+            remove(claimName);
+        } else {
+            put(claimName, claimValue);
+        }
+        return this;
+    }
 
 }

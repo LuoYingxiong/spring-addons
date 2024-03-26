@@ -31,6 +31,7 @@ import reactor.netty.transport.ProxyProvider;
 @Component
 @ConfigurationProperties(prefix = "com.c4-soft.springaddons.proxy")
 public class C4ProxySettings {
+
 	private Boolean enabled;
 	private ProxyProvider.Proxy type = ProxyProvider.Proxy.HTTP;
 	@Getter(AccessLevel.NONE)
